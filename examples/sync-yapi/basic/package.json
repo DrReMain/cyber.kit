@@ -1,0 +1,11 @@
+{
+  "name": "sync-yapi-basic",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "csync-yapi": "csync-yapi -c csync.config.ts"
+  },
+  "devDependencies": {
+    "@cyberdancer/sync-yapi": "workspace:*"
+  }
+}
