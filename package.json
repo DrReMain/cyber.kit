@@ -1,0 +1,20 @@
+{
+  "name": "cyber.kit",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "format": "turbo format",
+    "clean": "turbo clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo build --filter=\"...@cyberdancer/*\" && changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "turbo": "^1.10.12"
+  },
+  "packageManager": "pnpm@7.18.2"
+}
