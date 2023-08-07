@@ -1,7 +1,4 @@
 {
   "root": true,
-  "extends": ["xo", "xo-typescript", "prettier"],
-  "rules": {
-    "@typescript-eslint/no-confusing-void-expression": "off"
-  }
+  "extends": ["@cyberdancer/eslint-config-typescript"]
 }

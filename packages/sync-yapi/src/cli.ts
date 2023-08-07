@@ -6,7 +6,7 @@ import yargs from "yargs/yargs";
 
 import packageJson from "../package.json";
 
-import Sync from "./Sync";
+import Cmd from "./Cmd";
 
 register({
   skipProject: true,
@@ -52,7 +52,7 @@ if (require.main === module) {
 
   const _cmd = _argv._[0] as "init" | "sync" | undefined;
 
-  const instance = new Sync(resolve(process.cwd(), _argv.config as string));
+  const instance = new Cmd(resolve(process.cwd(), _argv.config as string));
 
   void instance[_cmd ?? "sync"]();
 }

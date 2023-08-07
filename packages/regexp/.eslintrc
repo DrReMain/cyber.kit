@@ -1,4 +1,4 @@
 {
   "root": true,
-  "extends": ["xo", "xo-typescript", "prettier"],
+  "extends": [    "@cyberdancer/eslint-config-typescript"]
 }

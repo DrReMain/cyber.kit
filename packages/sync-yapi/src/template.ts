@@ -1,13 +1,13 @@
-import { defineConfig } from "@cyberdancer/sync-yapi";
+export default `import { defineConfig } from "@cyberdancer/sync-yapi";
 
 export default defineConfig({
-  server: "http://yapi.cyber-dancer.tech/",
+  server: "http://yapi.example.com/",
   output: "src/services/params.d.ts",
-  dataKey: "result",
+  dataKey: "data",
   projects: [
     {
-      uniqName: "cyber-h5",
-      token: "08d67d712c84ea538556a6f4644b4d29fe99b70f150c761819a7f0175eb93d2c",
+      uniqName: "admin", // 项目唯一名称，必须唯一
+      token: "this_is_YAPI_project_token",
       defineReqDataTypeName(interfaceInfo, changeCase) {
         return "Req";
       },
@@ -17,3 +17,5 @@ export default defineConfig({
     },
   ],
 });
+
+`;

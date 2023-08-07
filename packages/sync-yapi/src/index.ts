@@ -1,3 +1,2 @@
-export function greet() {
-  console.log("csync-yapi");
-}
+export * from "./helper";
+export * from "./type";
