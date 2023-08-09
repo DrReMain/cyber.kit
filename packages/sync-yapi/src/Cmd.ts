@@ -54,12 +54,12 @@ export default class Cmd {
 
       // 生成完毕
       spinner.text = `正在生成代码...  \r`;
-      const output = await this.generator.generate();
+      await this.generator.generate();
       consola.success("生成代码完毕 💥");
 
       // 写入文件
       spinner.text = `正在写入文件...  \r`;
-      await this.generator.write(output);
+      await this.generator.write();
       consola.success("写入文件完毕 🥳");
     } catch (e) {
       consola.error(e);
