@@ -1,3 +1,6 @@
+import { resolve } from "node:path";
+import { Project, type SourceFile } from "ts-morph";
+
 import type {
   IPrivateProjects,
   IServerConfig,
@@ -8,12 +11,23 @@ import type {
 } from "./type";
 
 export default class Generator {
+  private readonly sourceFile: SourceFile;
+
   private readonly _projects: IPrivateProjects = {};
 
   constructor(
     private readonly _config: IServerConfig,
     private readonly _options: { cwd: string }
-  ) {}
+  ) {
+    const project = new Project();
+    this.sourceFile = project.createSourceFile(
+      resolve(_options.cwd, _config.output),
+      "",
+      {
+        overwrite: true,
+      }
+    );
+  }
 
   public async prepare() {
     try {
@@ -74,12 +88,32 @@ export default class Generator {
     }
   }
 
-  public async generate(): Promise<string> {
-    console.log(this._projects);
-    return "TODO";
+  public async generate() {
+    Object.values(this._projects).forEach(({ interfaces }) => {
+      interfaces?.forEach((_) => {
+        const requestInterface = this.sourceFile.addInterface({
+          name: `Req${_.path.replace(/[^0-9A-z]/g, "")}`,
+          isExported: true,
+        });
+        requestInterface.addProperty({
+          name: "name",
+          type: "string",
+        });
+
+        const responseInterface = this.sourceFile.addInterface({
+          name: `Res${_.path.replace(/[^0-9A-z]/g, "")}`,
+          isExported: true,
+        });
+        responseInterface.addProperty({
+          name: "result",
+          type: "{ name: string; data: { id: string; skills: string[] } }",
+        });
+      });
+    });
   }
 
-  public async write(_: string) {
-    //
+  public async write() {
+    this.sourceFile.formatText();
+    this.sourceFile.saveSync();
   }
 }
